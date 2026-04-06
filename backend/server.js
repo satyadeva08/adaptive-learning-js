@@ -11,11 +11,11 @@ app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ limit: '20mb', extended: true }));
 // ── Database pool ─────────────────────────────────────────────────────────────
 const db = mysql.createPool({
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 3306,
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'adaptive_learning',
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 10
 });
@@ -304,4 +304,7 @@ app.post('/api/extract-marks', auth, async (req, res) => {
 
 // ── Start server ──────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`✅ StudyIQ backend running on http://localhost:${PORT}`));
+
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
+});
